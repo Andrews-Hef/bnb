@@ -8,7 +8,7 @@ use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass=AdRepository::class)
- * @orm\haslifecycleCallBacks
+ * @orm\hasLifecycleCallBacks
  */
 class Ad
 {
@@ -142,10 +142,18 @@ class Ad
 
         return $this;
     }
+    /**
+     * permet d'initialiser le slug !
+     * 
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
     public function initializeSLug(){
         if(empty($this->slug)){
-             $slugify=SLugify();
-            $this->slug='...';
+             $slugify= new SLugify();
+            $this->slug= $slugify->slugify($this->title);
         }
     }
 }
