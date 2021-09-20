@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\AdRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass=AdRepository::class)
+ * @orm\haslifecycleCallBacks
  */
 class Ad
 {
@@ -139,5 +141,11 @@ class Ad
         $this->rooms = $rooms;
 
         return $this;
+    }
+    public function initializeSLug(){
+        if(empty($this->slug)){
+             $slugify=SLugify();
+            $this->slug='...';
+        }
     }
 }
