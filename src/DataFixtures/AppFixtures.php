@@ -4,8 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Ad;
 use Faker\Factory;
+use App\Entity\Image;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Cocur\Slugify\Slugify;
 
 class AppFixtures extends Fixture
 {
@@ -30,6 +32,16 @@ class AppFixtures extends Fixture
                 ->setContent($content)
                 ->setPrice(mt_rand(40, 200))
                 ->setRooms(mt_rand(1,5));
+                
+                for($j =1; $j <= mt_rand(2,5);$j++){
+                  $image = new Image();
+
+                  $image->setUrl($faker->ImageUrl())
+                        ->setCaption($faker->sentence())
+                        ->setAd($ad);
+
+                    $manager->persist($image);
+                }
     
                 $manager->persist($ad);
 
@@ -41,4 +53,4 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 }
- //video 46 minutes
+ //
