@@ -31,8 +31,9 @@ class AdController extends AbstractController
      * 
      * @return Response
      */
-    public function show($slug){
-
+    public function show($slug,AdRepository $repo){
+       //je recupere l'annonce du slug
+        $ad =$repo->findBySlug();
     }
 }
 //video4  22 min
