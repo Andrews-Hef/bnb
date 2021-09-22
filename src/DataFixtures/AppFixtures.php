@@ -5,9 +5,9 @@ namespace App\DataFixtures;
 use App\Entity\Ad;
 use Faker\Factory;
 use App\Entity\Image;
+use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Cocur\Slugify\Slugify;
 
 class AppFixtures extends Fixture
 {
@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
                 ->setCoverImage($coverImage)
                 ->setIntroduction($introduction)
                 ->setContent($content)
-                ->setPrice(mt_rand(40, 200))
+                ->setPrice(mt_rand(40,200))
                 ->setRooms(mt_rand(1,5));
                 
                 for($j =1; $j <= mt_rand(2,5);$j++){
