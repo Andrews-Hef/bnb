@@ -4,9 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Form\AdType;
+use App\Entity\Image;
 use App\Repository\AdRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,15 +42,26 @@ class AdController extends AbstractController
       */
     public function create(Request $request, EntityManagerInterface $manager){
         $ad = new Ad();
+     
 
+        $image = new Image();
+        
 
-        $form= $this->createForm(AdType::class,$ad);
+        $image->setUrl('http://placehold.it/400x200')
+              ->setCaption('Titre 1');
+        $image2 = new Image();
+        $image2->setUrl('http://placehold.it/400x200')
+               ->setCaption('Titre 2');
+              
+        $ad->addImage($image)
+           ->addImage($image2);
+
+        $form= $this->createForm(AdType::class, $ad);
 
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid() ){
             //$manager =$this->getDoctrine()->getManager();
-
+            
             $manager->persist($ad);
             $manager->flush();
 

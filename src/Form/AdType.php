@@ -3,16 +3,19 @@
 namespace App\Form;
 
 use App\Entity\Ad;
-use Doctrine\DBAL\Types\TextType as DoctrineTextType;
-use phpDocumentor\Reflection\Types\Integer;
+use App\Entity\Image;
+use App\Form\ImageType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Form\FormBuilderInterface;
+use Doctrine\DBAL\Types\TextType as DoctrineTextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class AdType extends AbstractType
 {
@@ -45,6 +48,9 @@ private function getConfiguration($label,$placeholder){
             ->add('content',TextareaType::class, $this->getConfiguration("description detaillé","tapez une description qui donne vriament envie de venir chez vous!"))
             ->add('coverImage', UrlType::class, $this->getConfiguration("URL de l'image","donnez une jolie image") )
             ->add('rooms', IntegerType::class,$this->getConfiguration("nombre de chambrs","le nombre de chambes disponible ") )
+            ->add('images',CollectionType::class,[
+              'entry_type'=>  ImageType::class
+            ])
         ;
     }
 
