@@ -50,6 +50,7 @@ private function getConfiguration($label,$placeholder){
             ->add('rooms', IntegerType::class,$this->getConfiguration("nombre de chambrs","le nombre de chambes disponible ") )
             ->add('images',CollectionType::class,[
               'entry_type'=>  ImageType::class
+              
             ])
         ;
     }
