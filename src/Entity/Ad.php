@@ -16,12 +16,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(
  *  fields={"title"},
- * message="une autre annonce possede deja ce  titre modifier"
+ * message="une autre annonce possede deja ce  titre  veuillez modifier"
  * 
  * )
  */
 class Ad
 {
+
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -48,13 +50,13 @@ class Ad
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\length(min=20, minMessage="votre introduction doit faire plus de 20 charactere")
+     * @Assert\length(min=10, minMessage="votre introduction doit faire plus de {{ limit }} characteres")
      */
     private $introduction;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\length(min= 100, minMessage="votre description doit faire plus de 100 charactere")
+     * @Assert\length(min= 10, minMessage="votre description doit faire plus de 10 characteres")
      */
     private $content;
 
