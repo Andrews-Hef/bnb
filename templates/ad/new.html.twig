@@ -26,6 +26,8 @@
 
 {{ form_widget(form) }}
 
+<input type="hidden" id="widgets-counter" value="0">
+
 <div class="form-group">
     <button type="button" id="add-image" class="btn btn-info">ajouter une image</button>
 </div>
@@ -66,13 +68,15 @@
 <script>
    $('#add-image').click(function(){
        //je recupere le numero des futurs champs que je vais créer
-       const index = $('#ad_images div.form-group').length;
+       const index = +$('#widgets-counter').val();
 
        //je recupere le prototype des entrées
        const tmpl =$('#ad_images').data('prototype').replace(/__name__/g, index) ;
 
        //j'injecte ce code au sein de la div
        $('#ad_images').append(tmpl);
+
+       $('#widgets-counter').val(index +1);
 
        //je gere le bouton supprimer
        handleDeleteButtons();

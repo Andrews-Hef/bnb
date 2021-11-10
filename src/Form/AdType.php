@@ -26,15 +26,16 @@ class AdType extends AbstractType
      *
      * @param [type] $label
      * @param [type] $placeholder
+     * @param array $options
      * @return array
      */
-private function getConfiguration($label,$placeholder){
-  return[
+private function getConfiguration($label,$placeholder, $options= []){
+  return array_merge([
         'label'=> $label,
         'attr' => [
             'placeholder' => $placeholder
         ]
-    ];
+    ], $options);
 
 }
 
@@ -42,12 +43,14 @@ private function getConfiguration($label,$placeholder){
     {
         $builder
             ->add('title', TextType::class, $this->getConfiguration("Titre","Tapez un super titre !"))
-            ->add('slug', TextType::class,$this->getConfiguration("Adresse web","Tapez l'adressse web (automatique)"))
+            ->add('slug', TextType::class,$this->getConfiguration("Adresse web","Tapez l'adressse web (automatique)",[
+                'required'=> false
+            ]))
             ->add('price', MoneyType::class,$this->getConfiguration("Prix par nuit","indiquez le prix que vous voulez pour une nuit") )
             ->add('introduction',TextType::class,$this->getConfiguration("introduction","donnez une description globale de l'annonce"))
             ->add('content',TextareaType::class, $this->getConfiguration("description detaillé","tapez une description qui donne vriament envie de venir chez vous!"))
-            ->add('coverImage', UrlType::class, $this->getConfiguration("URL de l'image","donnez une jolie image") )
-            ->add('rooms', IntegerType::class,$this->getConfiguration("nombre de chambrs","le nombre de chambes disponible ") )
+            ->add('coverImage', UrlType::class, $this->getConfiguration("URL de l'image","images principal de l'annonce ") )
+            ->add('rooms', IntegerType::class,$this->getConfiguration("nombre de chambres","le nombre de chambes disponible ") )
             ->add('images',CollectionType::class,[
               'entry_type'=>  ImageType::class,
               'allow_add'=> true 
