@@ -42,7 +42,7 @@ class AdController extends AbstractController
       */
     public function create(Request $request, EntityManagerInterface $manager){
         $ad = new Ad();
-     
+        
 
         
 
@@ -51,6 +51,10 @@ class AdController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid() ){
             //$manager =$this->getDoctrine()->getManager();
+            foreach($ad->getImages() as $image){
+                $image->setAd($ad);
+                $manager->persist($image);
+            }
             
             $manager->persist($ad);
             $manager->flush();

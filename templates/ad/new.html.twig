@@ -53,7 +53,7 @@
               </div>
             </div>
             <div class="col-2">
-                 <button type="button" data-action="delete" class="btn btn-danger">X</button>
+                 <button type="button" data-action="delete"  data-target="#block_{{id}}" class="btn btn-danger">X</button>
             </div>
         </div>
 
@@ -74,16 +74,21 @@
        //j'injecte ce code au sein de la div
        $('#ad_images').append(tmpl);
 
+       //je gere le bouton supprimer
+       handleDeleteButtons();
+
    });
 
    function handleDeleteButtons(){
        $('button[data-action="delete"]').click(function(){
            const target = this.dataset.target;
 
-           console.log(target);
+           $(target).remove();
 
        });
    }
+
+   handleDeleteButtons();
 </script>
 
 {% endblock %}
