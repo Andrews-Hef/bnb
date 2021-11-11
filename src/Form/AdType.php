@@ -53,7 +53,8 @@ private function getConfiguration($label,$placeholder, $options= []){
             ->add('rooms', IntegerType::class,$this->getConfiguration("nombre de chambres","le nombre de chambes disponible ") )
             ->add('images',CollectionType::class,[
               'entry_type'=>  ImageType::class,
-              'allow_add'=> true 
+              'allow_add'=> true,
+              'allow_delete'=> true
               
             ])
         ;
